@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RapidRoute</string>
+    <string-array name="roles">
+        <item name="customer">Customer</item>
+        <item name="admin">Admin</item>
+        <item name="delivery_personnel">Delivery personnel</item>
+    </string-array>
+</resources>
