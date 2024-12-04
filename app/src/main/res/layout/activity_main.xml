@@ -94,6 +94,14 @@
         android:padding="8dp"
         android:textSize="14sp"
         android:id="@+id/signup_text"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/goto_signup_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:layout_gravity="center_horizontal" />
+
 
 </LinearLayout>

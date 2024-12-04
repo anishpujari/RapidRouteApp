@@ -59,19 +59,19 @@
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/s_up_conf_password"
-                android:hint="confirm password"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_lock_person_24"
-                android:inputType="textPassword"
-                android:drawablePadding="8dp"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="20dp"/>
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:id="@+id/s_up_conf_password"-->
+<!--                android:hint="confirm password"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:drawableLeft="@drawable/baseline_lock_person_24"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:drawablePadding="8dp"-->
+<!--                android:padding="8dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textColorHighlight="@color/cardview_dark_background"-->
+<!--                android:layout_marginTop="20dp"/>-->
 
             <Spinner
                 android:layout_width="match_parent"
@@ -105,6 +105,14 @@
         android:padding="8dp"
         android:textSize="14sp"
         android:id="@+id/login_text"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/goto_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:layout_gravity="center_horizontal" />
+
 
 </LinearLayout>
