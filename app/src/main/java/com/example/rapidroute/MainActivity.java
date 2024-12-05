@@ -76,22 +76,52 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinner.setOnItemSelectedListener(this);
     }
 
-    private void login(User user){
+    private void login(User user) {
         apiService.login(user).enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful() && response.body() != null) {
+                    UserResponse.UserData loggedInUser = response.body().getUser();
+                    if (loggedInUser != null) {
+                        String role = loggedInUser.getRole();
+
+                        // Redirect based on role
+                        switch (role) {
+                            case "Admin":
+                                Toast.makeText(MainActivity.this, "Admin", Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(MainActivity.this, AdminDashboardActivity.class));
+                                break;
+                            case "Post manager":
+                                Toast.makeText(MainActivity.this, "Post manager", Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(MainActivity.this, PostManagerActivity.class));
+                                break;
+                            case "Delivery partner":
+//                                Toast.makeText(MainActivity.this, "Delivery partner", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, DeliveryAgentActivity.class));
+                                break;
+                            case "Customer":
+                                Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(MainActivity.this, CustomerHomeActivity.class));
+                                break;
+                            default:
+                                Toast.makeText(MainActivity.this, "Unknown role", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    } else {
+                        Toast.makeText(MainActivity.this, "User data is missing", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(MainActivity.this, "Login failed: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Login failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

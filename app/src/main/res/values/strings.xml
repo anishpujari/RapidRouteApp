@@ -3,6 +3,6 @@
     <string-array name="roles">
         <item name="customer">Customer</item>
         <item name="admin">Admin</item>
-        <item name="delivery_personnel">Delivery personnel</item>
+        <item name="Delivery partner">Delivery partner</item>
     </string-array>
 </resources>
