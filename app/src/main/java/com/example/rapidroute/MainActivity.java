@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    EditText username,password;
+    EditText phone,password;
     Button login_btn,gotoSignup_btn;
     private Retrofit retrofit;
     private ApiService apiService;
@@ -39,14 +39,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return insets;
         });
 
-        username=findViewById(R.id.username);
+        phone=findViewById(R.id.phone);
         password=findViewById(R.id.password);
         login_btn=findViewById(R.id.login_btn);
         Spinner spinner=findViewById(R.id.dropdown_roles);
         gotoSignup_btn=findViewById(R.id.goto_signup_btn);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.8:3001/") // Replace with your backend URL
+                .baseUrl("http://172.16.72.110:3001/") // Replace with your backend URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void onClick(View view) {
-                String email=username.getText().toString();
+                String phoneno=phone.getText().toString();
                 String pass=password.getText().toString();
                 String role=spinner.getSelectedItem().toString();
 
-                User user = new User(email,pass,role);
+                User user = new User(phoneno,pass,role);
                 login(user);
                 }
         });
@@ -88,20 +88,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         // Redirect based on role
                         switch (role) {
                             case "Admin":
-                                Toast.makeText(MainActivity.this, "Admin", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Admin can only be accessed through web app", Toast.LENGTH_LONG).show();
 //                                startActivity(new Intent(MainActivity.this, AdminDashboardActivity.class));
-                                break;
-                            case "Post manager":
-                                Toast.makeText(MainActivity.this, "Post manager", Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(MainActivity.this, PostManagerActivity.class));
                                 break;
                             case "Delivery partner":
 //                                Toast.makeText(MainActivity.this, "Delivery partner", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(MainActivity.this, DeliveryAgentActivity.class));
                                 break;
                             case "Customer":
-                                Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(MainActivity.this, CustomerHomeActivity.class));
+//                                Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, CustomerActivity.class));
                                 break;
                             default:
                                 Toast.makeText(MainActivity.this, "Unknown role", Toast.LENGTH_SHORT).show();

@@ -35,8 +35,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/s_up_username"
-                android:hint="username"
+                android:id="@+id/s_up_phone"
+                android:hint="phone number"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_person_4_24"
                 android:drawablePadding="8dp"
@@ -44,6 +44,19 @@
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="40dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/s_up_email"
+                android:hint="email"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_person_4_24"
+                android:drawablePadding="8dp"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/cardview_dark_background"
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:layout_width="match_parent"

@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupPage extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    EditText s_up_username,s_up_password;
+    EditText s_up_email,s_up_password,s_up_phone;
     Button signup_btn,gotoLogin_btn;
     private Retrofit retrofit;
     private ApiService apiService;
@@ -39,14 +39,15 @@ public class SignupPage extends AppCompatActivity implements AdapterView.OnItemS
             return insets;
         });
 
-        s_up_username=findViewById(R.id.s_up_username);
+        s_up_email=findViewById(R.id.s_up_email);
+        s_up_phone = findViewById(R.id.s_up_phone);
         s_up_password=findViewById(R.id.s_up_password);
         signup_btn=findViewById(R.id.signup_btn);
         Spinner spinner_s_up=findViewById(R.id.dropdown_roles_s_up);
         gotoLogin_btn=findViewById(R.id.goto_login_btn);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.8:3001/")
+                .baseUrl("http://172.16.72.110:3001/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -63,11 +64,12 @@ public class SignupPage extends AppCompatActivity implements AdapterView.OnItemS
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = s_up_username.getText().toString();
+                String username = s_up_email.getText().toString();
+                String phone = s_up_phone.getText().toString();
                 String password = s_up_password.getText().toString();
                 String role = spinner_s_up.getSelectedItem().toString();
 
-                User user = new User(username,password,role);
+                User user = new User(username,phone,password,role);
                 signup(user);
             }
         });
@@ -81,13 +83,22 @@ public class SignupPage extends AppCompatActivity implements AdapterView.OnItemS
                 if (response.isSuccessful()) {
                     Toast.makeText(SignupPage.this, "SignUp successful", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(SignupPage.this, "SignUp failed: " + response.message(), Toast.LENGTH_SHORT).show();
+                    String errorMessage = "An unexpected error occurred";
+                    if (response.code() == 404) {
+                        errorMessage = "User already exists.";
+                    } else if (response.code() == 500) {
+                        errorMessage = "Server error.";
+                    }
+
+                    Toast.makeText(SignupPage.this, "SignUp failed: " + errorMessage, Toast.LENGTH_SHORT).show();
                 }
+
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(SignupPage.this, "SignUp failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 

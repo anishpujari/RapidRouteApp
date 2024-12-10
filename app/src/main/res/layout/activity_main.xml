@@ -38,8 +38,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/username"
-                android:hint="username"
+                android:id="@+id/phone"
+                android:hint="phone number"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_person_4_24"
                 android:drawablePadding="8dp"
