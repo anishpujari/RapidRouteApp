@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -47,6 +49,15 @@ public class DeliveryAgentActivity extends AppCompatActivity {
         EditText startLocationEditText = findViewById(R.id.startLocationEditText);
         EditText endLocationEditText = findViewById(R.id.endLocationEditText);
         Button getDirectionsButton = findViewById(R.id.getDirectionsButton);
+        TextView orderIdTextView = findViewById(R.id.order_id);
+        TextView weightTextView = findViewById(R.id.weight);
+        TextView volumeTextView = findViewById(R.id.volume);
+        TextView typeTextView = findViewById(R.id.type);
+        TextView natureTextView = findViewById(R.id.nature);
+        TextView addressTextView = findViewById(R.id.address);
+
+        fetchParcelDetails("12345", orderIdTextView, weightTextView, volumeTextView, typeTextView,
+                natureTextView, addressTextView, startLocationEditText, endLocationEditText);
 
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.map);
@@ -77,7 +88,53 @@ public class DeliveryAgentActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
+
+    private void fetchParcelDetails(String parcelId, TextView orderId, TextView weight, TextView volume,
+                                    TextView type, TextView nature, TextView address,
+                                    EditText startLocation, EditText endLocation) {
+
+        String url = "http://172.16.58.71:3001/fetch"; // Replace with your backend URL
+
+        JSONObject requestParams = new JSONObject();
+        try {
+            requestParams.put("id", parcelId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, requestParams,
+                response -> {
+                    try {
+                        JSONObject parcel = response.getJSONArray("t").getJSONObject(0);
+
+                        // Update UI Elements
+                        orderId.setText(parcel.optString("id"));
+                        weight.setText(parcel.optString("weight"));
+                        volume.setText(parcel.optString("dimensions"));
+                        type.setText(parcel.optString("type", "N/A"));
+                        nature.setText(parcel.optString("nature"));
+                        address.setText(parcel.optJSONObject("destination").toString());
+
+                        // Autofill Locations
+                        startLocation.setText(parcel.optJSONObject("source").toString());
+                        endLocation.setText(parcel.optJSONObject("destination").toString());
+
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Error parsing parcel details", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> Toast.makeText(this, "Failed to fetch parcel details", Toast.LENGTH_SHORT).show()
+        );
+
+        // Add Request to Queue
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jsonObjectRequest);
+    }
+
 
 //    @Override
 //    public void onMapReady(GoogleMap googleMap) {

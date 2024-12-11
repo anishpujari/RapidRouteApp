@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">RapidRoute</string>
     <string-array name="roles">
-        <item name="customer">Customer</item>
-        <item name="admin">Admin</item>
-        <item name="Delivery partner">Delivery partner</item>
+        <item name="customer">customer</item>
+        <item name="admin">admin</item>
+        <item name="delivery partner">delivery partner</item>
     </string-array>
 </resources>

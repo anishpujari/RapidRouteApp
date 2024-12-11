@@ -45,8 +45,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Spinner spinner=findViewById(R.id.dropdown_roles);
         gotoSignup_btn=findViewById(R.id.goto_signup_btn);
 
+        Button dummy = findViewById(R.id.dummy);
+
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.16.72.110:3001/") // Replace with your backend URL
+                .baseUrl("http://172.16.58.71:3001/") // Replace with your backend URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -60,16 +62,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+
+        dummy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, DeliveryAgentActivity.class));
+            }
+        });
+
         login_btn.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View view) {
-                String phoneno=phone.getText().toString();
+                String phoneno=phone.getText().toString().trim();
                 String pass=password.getText().toString();
                 String role=spinner.getSelectedItem().toString();
 
-                User user = new User(phoneno,pass,role);
+                User user = new User(phoneno,pass);
                 login(user);
                 }
         });
@@ -87,15 +97,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                         // Redirect based on role
                         switch (role) {
-                            case "Admin":
+                            case "admin":
                                 Toast.makeText(MainActivity.this, "Admin can only be accessed through web app", Toast.LENGTH_LONG).show();
 //                                startActivity(new Intent(MainActivity.this, AdminDashboardActivity.class));
                                 break;
-                            case "Delivery partner":
+                            case "delivery partner":
 //                                Toast.makeText(MainActivity.this, "Delivery partner", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(MainActivity.this, DeliveryAgentActivity.class));
                                 break;
-                            case "Customer":
+                            case "customer":
 //                                Toast.makeText(MainActivity.this, "Customer", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(MainActivity.this, CustomerActivity.class));
                                 break;

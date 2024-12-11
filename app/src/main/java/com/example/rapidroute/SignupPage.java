@@ -47,7 +47,7 @@ public class SignupPage extends AppCompatActivity implements AdapterView.OnItemS
         gotoLogin_btn=findViewById(R.id.goto_login_btn);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.16.72.110:3001/")
+                .baseUrl("http://172.16.58.71:3001/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -64,12 +64,12 @@ public class SignupPage extends AppCompatActivity implements AdapterView.OnItemS
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = s_up_email.getText().toString();
+                String email = s_up_email.getText().toString();
                 String phone = s_up_phone.getText().toString();
                 String password = s_up_password.getText().toString();
                 String role = spinner_s_up.getSelectedItem().toString();
 
-                User user = new User(username,phone,password,role);
+                User user = new User(email,phone,password,role);
                 signup(user);
             }
         });

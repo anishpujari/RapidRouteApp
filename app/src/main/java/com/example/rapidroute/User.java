@@ -6,10 +6,9 @@ public class User {
     private String password;
     private String role;
 
-    public User(String email, String password, String role) {
-        this.email = email;
+    public User(String phone, String password) {
+        this.phone = phone;
         this.password = password;
-        this.role = role;
     }
 
     public User(String email, String phone, String password, String role) {
@@ -42,5 +41,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

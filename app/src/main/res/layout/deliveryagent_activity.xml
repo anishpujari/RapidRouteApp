@@ -1,29 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:padding="16dp"
+    android:background="#D3D3D3">
 
-    <EditText
-        android:id="@+id/startLocationEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter starting location" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:layout_margin="8dp"
+        android:clipToPadding="false">
 
-    <EditText
-        android:id="@+id/endLocationEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter destination"
-        android:layout_marginTop="8dp"/>
+        <!-- Heading -->
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Details"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#003366"
+            android:paddingBottom="16dp" />
 
-    <Button
-        android:id="@+id/getDirectionsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Directions"
-        android:layout_marginTop="16dp" />
+        <!-- Order ID -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/order_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order ID:"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12345"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <!-- Weight -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/weight_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight (kg):"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.0"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <!-- Volume -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/volume_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volume (cm³):"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1500"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <!-- Type -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"><TextView
+            android:id="@+id/type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type:"
+            android:textSize="16sp"
+            android:textColor="#003366"
+            android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Electronics"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <!-- Nature -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/nature_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nature:"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/nature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fragile"
+                android:textSize="16sp"
+                android:textColor="#003366"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+        <!-- Delivery Address -->
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery Address:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#003366"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123 Main Street, Cityville, State, 123456"
+            android:textSize="16sp"
+            android:textColor="#003366"
+            android:background="#D3D3D3"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp" />
 
 
-</LinearLayout>
+        <!-- to check the api -->
+        <EditText
+            android:id="@+id/startLocationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter starting location" />
+
+        <EditText
+            android:id="@+id/endLocationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter destination"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Get Directions Button -->
+        <Button
+            android:id="@+id/getDirectionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Directions"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FFA500"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:elevation="4dp"
+            android:padding="12dp" />
+
+    </LinearLayout>
+</ScrollView>
